@@ -1,0 +1,163 @@
+/*login adm*/
+
+body {
+    font-family: 'Lora', serif;
+    background-color: #F5F3EE;
+}
+
+.login-page {
+    background-color: #F5F3EE;
+}
+
+.btn-primary {
+    background-color: #1F3A56;
+}
+
+.card {
+    max-width: 450px;
+    border: 2px solid #C6A25A;
+    background-color: white;
+}
+
+.navbar {
+    background-color: #1F3A56;
+}
+
+.navbar .navbar-brand {
+    color: white;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu .navbar-brand {
+    margin-right: 20px;
+}
+
+.navbar .nav-link {
+    color: white;
+}
+
+
+/*cards do dashboard*/
+
+.cards-dashboard .card {
+    max-width: none;
+    height: 100%;
+    border: 1px solid #C6A25A;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(31, 58, 86, 0.12);
+    transition: 0.3s;
+}
+
+.cards-dashboard .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(31, 58, 86, 0.20);
+}
+
+.cards-dashboard .card-body {
+    padding: 25px;
+}
+
+.cards-dashboard .card i {
+    color: #C6A25A;
+}
+
+.cards-dashboard .card h5 {
+    color: #1F3A56;
+}
+
+.cards-dashboard .card p {
+    color: #555;
+}
+
+
+/*tabela gerenciar adm*/
+
+.titulo-pagina {
+    color: #1F3A56;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.table-striped-columns thead th {
+    background-color: #1F3A56 !important;
+    color: white;
+}
+
+.table-striped-columns > :not(caption) > tr > :nth-child(odd) {
+    background-color: #F5F3EE;
+}
+
+.table-striped-columns > :not(caption) > tr > :nth-child(even) {
+    background-color: #E8E0D5;
+}
+
+.table td:last-child img {
+    text-align: center;
+}
+
+.table td:last-child img {
+    margin: 5px;
+}
+
+
+/*footer*/
+
+.footer {
+    background-color: #1F3A56;
+    padding: 20px 0;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/*formulários*/
+
+.titulo-formulario {
+    color: #1F3A56;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.form-label {
+    color: #1F3A56;
+}
+
+.form-control {
+    border: 1px solid #C6A25A;
+}
+
+.btn-cancelar {
+    background-color: #1F3A56;
+    color: white;
+}
+
+.btn-cancelar:hover {
+    background-color: #146cb4;
+    color: white;
+}
+
+.card-formulario {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.btn-adicionar {
+    background-color: #1F3A56;
+    color: white;
+    border: 2px solid #C6A25A;
+}
+
+.btn-adicionar:hover {
+    background-color: #C6A25A;
+    color: #1F3A56;
+}
