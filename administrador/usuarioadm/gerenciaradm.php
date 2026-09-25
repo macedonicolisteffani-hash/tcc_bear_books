@@ -29,7 +29,7 @@ include "../../ARQUIVOS/conexao.php";
         <div class="container">
 
             <a class="navbar-brand" href="../MenuAdministrador.php">
-                <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
+                <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
 
             <div class="navbar-nav ms-auto">

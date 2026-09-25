@@ -29,21 +29,24 @@ include "../../ARQUIVOS/conexao.php";
         <div class="container">
 
             <a class="navbar-brand" href="../MenuAdministrador.php">
-                <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
+                <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
 
             <div class="navbar-nav ms-auto">
+
                 <a class="nav-link" href="../MenuAdministrador.php">
                     <i class="bi bi-house-door-fill"></i>
                     Home do ADM
                 </a>
+
             </div>
 
         </div>
     </nav>
 
 
-    <!-- Inicio da Tabela de visualização de livros -->
+    <!-- Inicio da visualização dos livros -->
+
     <div class="container mt-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -58,71 +61,81 @@ include "../../ARQUIVOS/conexao.php";
         </div>
 
 
-        <div class="row justify-content-center">
+        <div class="table-responsive tabela-livros">
 
-            <div class="col-sm-12 col-md-10 col-lg-10">
+            <table class="table table-hover">
 
-                <div class="table-responsive">
+                <thead class="text-center">
 
-                    <table class="table table-striped-columns table-bordered">
+                    <tr>
+                        <th>Capa</th>
+                        <th>Título</th>
+                        <th>Autor</th>
+                        <th>Ano</th>
+                        <th>Ações</th>
+                    </tr>
 
-                        <thead class="text-center">
-                            <tr>
-                                <th>Título</th>
-                                <th>Autor</th>
-                                <th>ISBN</th>
-                                <th>Ano</th>
-                                <th>Páginas</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
+                </thead>
 
-                        <tbody>
+                <tbody>
 
-                            <?php
+                    <?php
 
-                            /* Verifica se há registros retornados */
-                            $sql = "SELECT * FROM cadastro_liv";
-                            $result = $conn->query($sql);
+                    /* Busca os livros cadastrados */
+                    $sql = "SELECT * FROM cadastro_liv";
+                    $result = $conn->query($sql);
 
-                            while ($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
 
-                                /* Chave primária */
-                                $id_liv = $row['id_liv'];
+                        $id_liv = $row['id_liv'];
 
-                                echo "<tr>
+                        $imagem = !empty($row['foto_capa']) ?
+                            "../../ARQUIVOS/capas/" . $row['foto_capa'] :
+                            "../../ARQUIVOS/img/semfoto.png";
 
-                            <td>{$row['titulo']}</td>
-                            <td>{$row['autor']}</td>
-                            <td>{$row['isbn']}</td>
-                            <td>{$row['ano']}</td>
-                            <td>{$row['num_pagina']}</td>
+                        ?>
 
-                            <td class='text-center'>
+                        <tr>
 
-                                <a href='editarformlivroAdm.php?id_liv=$id_liv'>
-                                    <img src='../../ARQUIVOS/img/lapis.png' width='30' height='30'>
+                            <td class="text-center">
+                                <img src="<?php echo $imagem; ?>" class="capa-livro">
+                            </td>
+
+                            <td>
+                                <?php echo $row['titulo']; ?>
+                            </td>
+
+                            <td>
+                                <?php echo $row['autor']; ?>
+                            </td>
+
+                            <td class="text-center">
+                                <?php echo $row['ano']; ?>
+                            </td>
+
+                            <td class="text-center">
+
+                                <a href="editarformlivroAdm.php?id_liv=<?php echo $id_liv; ?>">
+                                    <img src="../../ARQUIVOS/img/lapis.png" width="30" height="30">
                                 </a>
 
-                                <a href='deletelivroAdm.php?id_liv=$id_liv'
-                                    onclick=\"return confirm('Deseja realmente excluir o livro {$row['titulo']}?');\">
-                                    <img src='../../ARQUIVOS/img/lixeira.png' width='30' height='30'>
+                                <a href="deletelivroAdm.php?id_liv=<?php echo $id_liv; ?>"
+                                    onclick="return confirm('Deseja realmente excluir o livro <?php echo $row['titulo']; ?>?');">
+                                    <img src="../../ARQUIVOS/img/lixeira.png" width="30" height="30">
                                 </a>
 
                             </td>
 
-                        </tr>";
-                            }
+                        </tr>
 
-                            ?>
+                        <?php
+                    }
 
-                        </tbody>
+                    ?>
 
-                    </table>
+                </tbody>
 
-                </div>
-
-            </div>
+            </table>
 
         </div>
 

@@ -1,5 +1,5 @@
 <?php
-include "../conexao.php";
+include "../../ARQUIVOS/conexao.php";
 $id_adm = $_GET['id_adm'];
 
 $sql ="DELETE FROM usuario WHERE

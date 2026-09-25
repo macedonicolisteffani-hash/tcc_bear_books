@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../conexao.php";
+include "../ARQUIVOS/conexao.php";
 $erro = "";
 
 /*O login precisa solicitar acesso ao servidor

@@ -3,6 +3,9 @@
 body {
     font-family: 'Lora', serif;
     background-color: #F5F3EE;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .login-page {
@@ -11,6 +14,24 @@ body {
 
 .btn-primary {
     background-color: #1F3A56;
+    color: white;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4185c4;
+    color: white;
+    border: none;
+}
+
+.btn-primary:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.btn-cancelar,
+.btn-primary {
+    width: 120px;
 }
 
 .card {
@@ -19,12 +40,20 @@ body {
     background-color: white;
 }
 
+
+/*menu*/
+
 .navbar {
     background-color: #1F3A56;
 }
 
 .navbar .navbar-brand {
     color: white;
+}
+
+.navbar .navbar-brand img {
+    width: 95px;
+    height: auto;
 }
 
 .menu {
@@ -98,11 +127,11 @@ body {
 }
 
 .table td:last-child img {
-    text-align: center;
+    margin: 5px;
 }
 
-.table td:last-child img {
-    margin: 5px;
+.table td:last-child a {
+    text-decoration: none;
 }
 
 
@@ -113,10 +142,7 @@ body {
     padding: 20px 0;
     text-align: center;
     color: white;
-    margin-top: 40px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    margin-top: auto;
 }
 
 
@@ -149,6 +175,7 @@ body {
 .card-formulario {
     max-width: 800px;
     margin: 0 auto;
+    border-radius: 15px;
 }
 
 .btn-adicionar {
@@ -160,4 +187,374 @@ body {
 .btn-adicionar:hover {
     background-color: #C6A25A;
     color: #1F3A56;
+}
+
+
+/*tabela gerenciar livros*/
+
+.tabela-livros {
+    margin-top: 20px;
+}
+
+.tabela-livros table {
+    background-color: white;
+}
+
+.tabela-livros thead th {
+    background-color: #1F3A56;
+    color: white;
+}
+
+.tabela-livros td {
+    vertical-align: middle;
+}
+
+.capa-livro {
+    width: 90px;
+    height: auto;
+    border: 1px solid #C6A25A;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/*cards dos livros home-Jhulia*/
+
+.cards-livros .card {
+    height: 100%;
+    border: 1px solid #C6A25A;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(31, 58, 86, 0.12);
+    transition: 0.3s;
+}
+
+.cards-livros .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(31, 58, 86, 0.20);
+}
+
+.cards-livros .card-img-top {
+    height: 350px;
+    object-fit: cover;
+}
+
+.cards-livros .card-title {
+    color: #1F3A56;
+}
+
+.cards-livros .card-text {
+    color: #555;
+}
+
+.btn-editar {
+    background-color: #C6A25A;
+    color: #1F3A56;
+}
+
+.btn-editar:hover {
+    background-color: #1F3A56;
+    color: white;
+}
+
+.btn-excluir {
+    background-color: #8B0000;
+    color: white;
+}
+
+.btn-excluir:hover {
+    background-color: #650000;
+    color: white;
+}
+
+
+/*cadastro categoria e classificação*/
+
+.cadastro-conteudo {
+    margin-top: 50px;
+}
+
+.cadastro-titulo h1 {
+    color: #1F3A56;
+}
+
+.cadastro-titulo p {
+    color: #555;
+}
+
+.cadastro-formulario {
+    margin-top: 30px;
+    margin-left: 85px;
+}
+
+.cadastro-formulario h4 {
+    color: #1F3A56;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.cadastro-tabela {
+    margin-top: 96px;
+    margin-bottom: 50px;
+}
+
+.cadastro-tabela h2 {
+    color: #1F3A56;
+    margin-bottom: 10px;
+}
+
+.form-user {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.form-user h2 {
+    color: #1F3A56;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cadastro-usuario {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+
+
+/*transição do login usuario*/
+
+.login-usuario-page {
+    overflow-x: hidden;
+}
+
+.login-usuario-container {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+
+/*logo*/
+
+.logo-login-usuario {
+    position: absolute;
+    width: 35%;
+    left: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.8s ease;
+}
+
+.logo-login-usuario img {
+    width: 100%;
+    max-width: 430px;
+}
+
+
+/*login*/
+
+.formulario-login-usuario {
+    position: absolute;
+    width: 40%;
+    left: 55%;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.8s ease;
+}
+
+.formulario-login-usuario .card {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    padding: 40px !important;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+
+/*cadastro*/
+
+.formulario-cadastro-usuario {
+    position: absolute;
+    width: 40%;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.8s ease;
+}
+
+.formulario-cadastro-usuario .card {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    padding: 30px !important;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+
+/*quando abrir cadastro*/
+
+.mostrar-cadastro .logo-login-usuario {
+    left: 60%;
+}
+
+.mostrar-cadastro .formulario-login-usuario {
+    left: -50%;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.mostrar-cadastro .formulario-cadastro-usuario {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/*campos do cadastro*/
+
+.formulario-cadastro-usuario .mb-3 {
+    margin-bottom: 10px !important;
+}
+
+.formulario-cadastro-usuario .form-control {
+    padding: 8px 12px;
+}
+
+
+/*botão cadastrar*/
+
+.formulario-cadastro-usuario .btn-primary {
+    width: 120px;
+    display: block;
+    margin: 15px auto 0;
+    white-space: nowrap;
+}
+
+
+/*link já sou cadastrado*/
+
+.formulario-cadastro-usuario #voltarLogin {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+}
+
+
+/*tablet*/
+
+@media (max-width: 991px) and (min-width: 577px) {
+
+    .login-usuario-container {
+        height: 100vh;
+        min-height: 600px;
+    }
+
+    .logo-login-usuario {
+        width: 32%;
+        left: 5%;
+    }
+
+    .logo-login-usuario img {
+        max-width: 300px;
+    }
+
+    .formulario-login-usuario,
+    .formulario-cadastro-usuario {
+        width: 46%;
+    }
+
+    .formulario-login-usuario {
+        left: 51%;
+    }
+
+    .formulario-cadastro-usuario {
+        left: 3%;
+    }
+
+    .formulario-login-usuario .card,
+    .formulario-cadastro-usuario .card {
+        max-width: 390px;
+        padding: 28px !important;
+    }
+
+    .mostrar-cadastro .logo-login-usuario {
+        left: 63%;
+    }
+}
+
+
+/*celular*/
+
+@media (max-width: 576px) {
+
+    .login-usuario-page {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .login-usuario-container {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: 25px 0;
+    }
+
+    .logo-login-usuario {
+        position: relative;
+        width: 70%;
+        left: 15%;
+        top: 0;
+        transform: none;
+        margin-bottom: 25px;
+    }
+
+    .logo-login-usuario img {
+        width: 100%;
+        max-width: 280px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .formulario-login-usuario,
+    .formulario-cadastro-usuario {
+        position: relative;
+        width: 94%;
+        left: 3%;
+        top: 0;
+        transform: none;
+    }
+
+    .formulario-login-usuario .card,
+    .formulario-cadastro-usuario .card {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        padding: 25px !important;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+
+    .formulario-cadastro-usuario {
+        display: none;
+    }
+
+    .mostrar-cadastro .logo-login-usuario {
+        left: 15%;
+    }
+
+    .mostrar-cadastro .formulario-login-usuario {
+        display: none;
+    }
+
+    .mostrar-cadastro .formulario-cadastro-usuario {
+        display: block;
+        left: 3%;
+        opacity: 1;
+        visibility: visible;
+    }
 }

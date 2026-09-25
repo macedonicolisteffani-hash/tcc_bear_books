@@ -45,7 +45,7 @@ $result_categoria = $conn->query($sql_categoria);
         <div class="container">
 
             <a class="navbar-brand" href="../MenuAdministrador.php">
-                <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
+              <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
 
             <div class="navbar-nav ms-auto">
@@ -71,9 +71,7 @@ $result_categoria = $conn->query($sql_categoria);
                     <h2 class="titulo-formulario">Cadastro de Livro</h2>
 
 
-                    <form method="post" action="insertLivro.php" enctype="multipart/form-data">
-
-                        <input type="hidden" name="id_liv" value="">
+                    <form method="post" action="insertlivroAdm.php" enctype="multipart/form-data">
 
                         <div class="row">
 
@@ -237,15 +235,16 @@ $result_categoria = $conn->query($sql_categoria);
                                 <input type="file" class="form-control" id="imagem" name="arquivo_imagem" required>
                             </div>
 
-
                             <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-3">
-                                <button type="submit" class="btn btn-primary me-4">
-                                    Salvar
+
+                                <a href="gerenciarlivroAdm.php" class="btn btn-cancelar me-3">
+                                    Cancelar
+                                </a>
+
+                                <button type="submit" class="btn btn-primary">
+                                    Cadastrar
                                 </button>
 
-                                <button type="reset" class="btn btn-cancelar">
-                                    Cancelar
-                                </button>
                             </div>
 
 

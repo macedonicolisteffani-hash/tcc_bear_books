@@ -33,7 +33,7 @@ $administrador = $result->fetch_assoc();
         <div class="container">
 
             <a class="navbar-brand" href="../MenuAdministrador.php">
-                <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
+                <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
 
             <div class="navbar-nav ms-auto">
@@ -53,7 +53,7 @@ $administrador = $result->fetch_assoc();
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-10 col-lg-8">
 
-                <div class="card card-formulario p-4 shadow" >
+                <div class="card card-formulario p-4 shadow">
 
                     <h2 class="titulo-formulario">Edição de Administrador</h2>
 
@@ -81,24 +81,18 @@ $administrador = $result->fetch_assoc();
                                     placeholder="Insira seu e-mail" value="<?= $administrador['email_adm'] ?>" required>
                             </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-12 mb-4">
-                                <label for="senha" class="form-label ">Senha</label>
-                                <input type="password" class="form-control" id="senha" name="senha_adm"
-                                    placeholder="Insira sua senha" value="<?= $administrador['senha_adm'] ?>" required>
-                            </div>
+
 
                             <div class="col-sm-12 col-md-12 col-lg-12 text-center">
 
+                                <a href="gerenciaradm.php" class="btn btn-cancelar">
+                                    Cancelar
+                                </a>
                                 <button type="submit" class="btn btn-primary me-4">
                                     Editar
                                 </button>
 
-                                <button type="reset" class="btn btn-cancelar">
-                                    Apagar
-                                </button>
-
                             </div>
-
                         </div>
                     </form>
                 </div>

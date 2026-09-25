@@ -27,24 +27,24 @@ include "../../ARQUIVOS/conexao.php";
 
 <body>
     <nav class="navbar navbar-expand-lg">
-    <div class="container">
+        <div class="container">
 
-        <a class="navbar-brand" href="../MenuAdministrador.php">
-            <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
-        </a>
-
-        <div class="navbar-nav ms-auto">
-            <a class="nav-link" href="../MenuAdministrador.php">
-                <i class="bi bi-house-door-fill"></i>
-                Home do ADM
+            <a class="navbar-brand" href="../MenuAdministrador.php">
+                <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
+
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="../MenuAdministrador.php">
+                    <i class="bi bi-house-door-fill"></i>
+                    Home do ADM
+                </a>
+            </div>
+
         </div>
-
-    </div>
-</nav>
+    </nav>
 
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-10 col-lg-8">
 
@@ -78,14 +78,16 @@ include "../../ARQUIVOS/conexao.php";
                                     placeholder="Insira sua Senha" required>
                             </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
-                                <button type="submit" class="btn btn-primary me-4">
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-3">
+
+                                <a href="gerenciaradm.php" class="btn btn-cancelar me-3">
+                                    Cancelar
+                                </a>
+
+                                <button type="submit" class="btn btn-primary">
                                     Cadastrar
                                 </button>
 
-                                <button type="reset" class="btn btn-cancelar">
-                                    Cancelar
-                                </button>
                             </div>
 
                         </div>
@@ -94,7 +96,7 @@ include "../../ARQUIVOS/conexao.php";
             </div>
         </div>
     </div>
-     
+
     <footer class="footer">
         <p class="mb-0">© 2026 Bear Books - Todos os direitos reservados.</p>
     </footer>

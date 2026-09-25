@@ -1,5 +1,5 @@
 <?php
-include "../conexao.php";
+include "../../ARQUIVOS/conexao.php";
 $cpf_adm = $_GET['cpf_user'];
 
 $sql="SELECT * FROM usuario

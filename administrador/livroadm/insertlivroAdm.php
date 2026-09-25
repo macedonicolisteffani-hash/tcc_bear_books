@@ -67,10 +67,11 @@ VALUES ('$titulo','$isbn','$descricao','$id_editora','$autor','$id_classificacao
 if ($conn->query($sql) === TRUE) {
     echo "<script>
     alert('Dados Cadastrados com Sucesso!');
-    window.location.href='formlivroAdm.php';
+    window.location.href='gerenciarlivroAdm.php';
     </script>";
 } else {
-    echo 'Erro ao inserir:' . $conn->error;
+    echo "Erro ao inserir:</h2>";
+    echo  $conn->error;
 }
 
 ?>

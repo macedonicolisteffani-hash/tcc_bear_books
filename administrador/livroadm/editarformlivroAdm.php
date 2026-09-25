@@ -48,7 +48,7 @@ $result_editora = $conn->query($sql_editora);
         <div class="container">
 
             <a class="navbar-brand" href="../MenuAdministrador.php">
-                <img src="../../ARQUIVOS/img/logo.png" width="80" class="me-3">
+              <img src="../../ARQUIVOS/img/logo.png" class="me-3">
             </a>
 
             <div class="navbar-nav ms-auto">
@@ -278,14 +278,14 @@ $result_editora = $conn->query($sql_editora);
                             </div>
 
 
-                            <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                            <div class="col-sm-12 col-md-12 col-lg-12 text-center mt-3">
 
-                                <button type="submit" class="btn btn-primary me-4">
-                                    Editar
-                                </button>
+                                 <a href="gerenciarlivroAdm.php" class="btn btn-cancelar me-3">
+                                    Cancelar
+                                 </a>
 
-                                <button type="reset" class="btn btn-cancelar">
-                                    Apagar
+                                <button type="submit" class="btn btn-primary">
+                                     Editar
                                 </button>
 
                             </div>
