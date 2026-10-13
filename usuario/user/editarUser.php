@@ -1,78 +1,315 @@
 <?php
+session_start();
 include "../../ARQUIVOS/conexao.php";
-$cpf_adm = $_GET['cpf_user'];
 
-$sql="SELECT * FROM usuario
-WHERE cpf_user= $cpf_user";
+if (!isset($_SESSION['id_user'])) {
+    header("Location: ../loginUsuario.php");
+    exit;
+}
+
+$id_user = (int) $_SESSION['id_user'];
+
+$sql = "SELECT * FROM usuario WHERE id_user=$id_user";
 $result = $conn->query($sql);
-$admin = $result->fetch_assoc();
+
+if (!$result || $result->num_rows === 0) {
+    header("Location: ../logout.php");
+    exit;
+}
+
+$usuario = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Formulário de Alteração de Administrador</title>
+    <meta charset="UTF-8">
 
-<style>
-body{
-    font-family:Arial;
-    background-color:#f2f2f2;
-    text-align:center;
-}
-.container{
-    background:white;
-    width:600px;
-    margin:auto;
-    margin-top:30px;
-    padding:20px;
-    border-radius:10px;
-}
-.caixa{
-    width:80%;
-    padding:5px;
-    margin:5px;
-}
-img{
-    width:100px;
-    margin-bottom:10px;
-}
-.grupo{
-    text-align:left;
-    width:80%;
-    margin:auto;
-}
-.grupo label{
-    display:block;
-    margin:5px 0;
-}
-</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Editar Perfil</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
-<body>
 
-<div class="container">
+<body class="perfil-page">
 
-<img src="img/logo.png">    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
 
-<h2>Edição de User</h2>
+        <div class="container">
 
-<form method="post" action="updateAdm.php" enctype="multipart/form-data">
-    CPF:<br>
-    <input type="number" name="cpf_user" class="caixa" value="<?= $admin['cpf_user']?>"><br>
-      
-    Nome:<br>
-    <input type="text" name="nome_user" class="caixa" value="<?= $admin['nome_user']?>"><br>
-    
-    Email:<br>
-    <input type="email" name="email_user" class="caixa" value="<?= $admin['email_user']?>"><br>
-    
-    <br>  
-    Senha:<br>
-    <input type="password" name="senha_user" class="caixa" value="<?= $admin['senha_user']?>">
-    <br>
-    <br>
-<!--Botões de Enviar e Limpar-->
-<input type="submit" value="EDITAR" class="caixa">
+            <a class="navbar-brand" href="../index.php">
 
-</form>
+                <img src="../../ARQUIVOS/img/logo.png" alt="Bear Books">
+
+            </a>
+
+            <div class="ms-auto">
+
+                <a href="perfilUser.php" class="nav-link d-inline">
+
+                    Meu Perfil
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <main class="editar-perfil-conteudo">
+
+        <div class="container">
+
+            <div class="editar-perfil-card">
+
+                <div class="editar-perfil-titulo">
+
+                    <p>MINHA CONTA</p>
+
+                    <h1>Editar Perfil</h1>
+
+                    <span>
+                        Atualize suas informações pessoais.
+                    </span>
+
+                </div>
+
+                <form action="updateUser.php" method="POST" enctype="multipart/form-data">
+
+                    <!-- Foto -->
+                    <div class="editar-foto-area">
+
+                        <div class="editar-foto-preview">
+
+                            <?php if (!empty($usuario['foto_user'])) { ?>
+
+                                <img src="../../ARQUIVOS/fotos_usuario/<?php echo htmlspecialchars($usuario['foto_user']); ?>"
+                                    alt="Foto de perfil">
+
+                            <?php } else { ?>
+
+                                <i class="bi bi-person-circle"></i>
+
+                            <?php } ?>
+
+                        </div>
+
+                        <div>
+
+                            <label class="form-label">
+                                Foto de perfil
+                            </label>
+
+                            <input type="file" class="form-control" name="foto_user"
+                                accept="image/png,image/jpeg,image/jpg">
+
+                            <small>
+                                Escolha uma imagem JPG ou PNG.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Nome -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Nome
+                        </label>
+
+                        <input type="text" class="form-control" name="nome_user"
+                            value="<?php echo htmlspecialchars($usuario['nome_user']); ?>" required>
+
+                    </div>
+
+                    <!-- CPF -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            CPF
+                        </label>
+
+                        <input type="text" class="form-control" name="cpf_user"
+                            value="<?php echo htmlspecialchars($usuario['cpf_user']); ?>" required>
+
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Email
+                        </label>
+
+                        <input type="email" class="form-control" name="email_user"
+                            value="<?php echo htmlspecialchars($usuario['email_user']); ?>" required>
+
+                    </div>
+
+                    <!-- Nova senha -->
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Nova senha
+                        </label>
+
+                        <input type="password" class="form-control" name="senha_user"
+                            placeholder="Digite apenas se quiser alterar">
+
+                        <small class="editar-ajuda">
+                            Deixe em branco para manter sua senha atual.
+                        </small>
+
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="editar-perfil-botoes">
+
+                        <a href="perfilUser.php" class="btn btn-cancelar">
+
+                            Cancelar
+
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+
+                            Salvar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-principal">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+                <!-- Bear Books -->
+                <div class="col-lg-4 col-md-6">
+
+                    <div class="footer-marca">
+
+                        <img src="../ARQUIVOS/img/logo.png" alt="Bear Books">
+
+                        <p>
+                            Uma biblioteca digital criada para
+                            aproximar você dos livros, da leitura
+                            e de novas histórias.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Navegação -->
+                <div class="col-lg-2 col-md-6">
+
+                    <div class="footer-links">
+
+                        <h5>Navegação</h5>
+
+                        <a href="index.php">
+                            Início
+                        </a>
+
+                        <a href="catalogo.php">
+                            Catálogo
+                        </a>
+
+                        <a href="sobre.php">
+                            Sobre
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Contato -->
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="footer-contato">
+
+                        <h5>Contato</h5>
+
+                        <p>
+                            <i class="bi bi-envelope"></i>
+                            contato@bearbooks.com
+                        </p>
+
+                        <p>
+                            <i class="bi bi-book"></i>
+                            Biblioteca digital
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Fale conosco -->
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="footer-fale">
+
+                        <h5>Precisa de ajuda?</h5>
+
+                        <p>
+                            Tem alguma dúvida ou sugestão?
+                            Entre em contato com nossa equipe.
+                        </p>
+
+                        <a href="faleconosco.php" class="btn-footer-contato">
+
+                            <i class="bi bi-chat-heart"></i>
+                            Fale Conosco
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-linha"></div>
+
+            <div class="footer-final">
+
+                <p>
+                    © 2026 Bear Books - Todos os direitos reservados.
+                </p>
+
+                <span>
+                    Literatura e tecnologia em um só lugar.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

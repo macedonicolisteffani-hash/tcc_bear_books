@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/09/2026 às 23:15
+-- Tempo de geração: 09/10/2026 às 19:06
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -85,7 +85,8 @@ CREATE TABLE `cadastro_liv` (
 --
 
 INSERT INTO `cadastro_liv` (`id_liv`, `titulo`, `isbn`, `descricao`, `id_editora`, `autor`, `id_classificacao`, `ano`, `num_pagina`, `edicao`, `id_categoria`, `foto_capa`, `pdf_livro`, `status`) VALUES
-(1, 'Memorias postumas de Bras cubas', ' 978-85-402-0716-5', 'Clássico do realismo brasileiro escrito por Machado de Assis, a obra é narrada por Brás Cubas, um \"defunto autor\" que decide contar as memórias da sua vida após a sua morte. Com ironia, pessimismo e bom humor, ele analisa a sociedade carioca do século XIX, seus próprios fracassos amorosos e suas ambições frustradas.', 1, 'Machado de Assis', 1, '2018', 183, '67', 1, 'capa.jpg', 'memorias_postumas_bras_cubas.pdf', 'destaque');
+(1, 'Memorias postumas de Bras cubas', ' 978-85-402-0716-5', 'Clássico do realismo brasileiro escrito por Machado de Assis, a obra é narrada por Brás Cubas, um \"defunto autor\" que decide contar as memórias da sua vida após a sua morte. Com ironia, pessimismo e bom humor, ele analisa a sociedade carioca do século XIX, seus próprios fracassos amorosos e suas ambições frustradas.', 1, 'Machado de Assis', 1, '2018', 183, '67', 1, 'capa.jpg', 'memorias_postumas_bras_cubas.pdf', 'destaque'),
+(2, 'O Cortiço', '978-85-402-0527-7', ' Esta versão é um recurso eletrônico (e-book) lançado em 2018 pela editora Edições Câmara, integrando o número 12 da Série Prazer de Ler. Trata-se de uma edição moderna que disponibiliza gratuitamente o texto integral de um dos maiores clássicos da literatura brasileira, cujo objetivo é preservar e compartilhar o patrimônio cultural nacional.', 3, 'Aluísio Azevedo ', 1, '0000', 227, '2018', 1, 'ocortico.jpeg', 'o_cortiço.pdf', 'novidade');
 
 -- --------------------------------------------------------
 
@@ -140,6 +141,21 @@ INSERT INTO `classificacao` (`id_classificacao`, `nome_classificacao`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `comentario`
+--
+
+CREATE TABLE `comentario` (
+  `id_comentario` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_liv` int(11) NOT NULL,
+  `comentario` text NOT NULL,
+  `data_comentario` datetime DEFAULT current_timestamp(),
+  `status_comentario` varchar(20) DEFAULT 'Ativo'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `downloads_liv`
 --
 
@@ -166,7 +182,29 @@ CREATE TABLE `editora` (
 --
 
 INSERT INTO `editora` (`id_editora`, `nome_editora`) VALUES
-(1, 'Darkside ');
+(1, 'Darkside '),
+(3, 'Edições Câmara');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `favoritos`
+--
+
+CREATE TABLE `favoritos` (
+  `id` int(5) NOT NULL,
+  `id_usuario` int(5) DEFAULT NULL,
+  `id_livro` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `favoritos`
+--
+
+INSERT INTO `favoritos` (`id`, `id_usuario`, `id_livro`) VALUES
+(25, 2, 1),
+(26, 2, 2),
+(29, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -179,8 +217,19 @@ CREATE TABLE `usuario` (
   `cpf_user` varchar(20) DEFAULT NULL,
   `nome_user` varchar(200) DEFAULT NULL,
   `email_user` varchar(200) DEFAULT NULL,
-  `senha_user` varchar(100) DEFAULT NULL
+  `senha_user` varchar(100) DEFAULT NULL,
+  `status_user` varchar(20) NOT NULL DEFAULT 'Ativo',
+  `foto_user` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_user`, `cpf_user`, `nome_user`, `email_user`, `senha_user`, `status_user`, `foto_user`) VALUES
+(1, '514.209.068-78', 'rafaele', 'maria@gmail.com', 'Lalola', 'Ativo', 'usuario_1_1791489531.jpeg'),
+(2, '514.209.068-77', 'pedro', 'macedonicolisteffani@gmail.com', 'Lalola', 'Ativo', 'usuario_2_1791489418.jpeg'),
+(4, '514.209.068-77', 'pedro come 4', 'victin@gmail.com', '123', 'Ativo', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -222,6 +271,14 @@ ALTER TABLE `classificacao`
   ADD PRIMARY KEY (`id_classificacao`);
 
 --
+-- Índices de tabela `comentario`
+--
+ALTER TABLE `comentario`
+  ADD PRIMARY KEY (`id_comentario`),
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_liv` (`id_liv`);
+
+--
 -- Índices de tabela `downloads_liv`
 --
 ALTER TABLE `downloads_liv`
@@ -234,6 +291,14 @@ ALTER TABLE `downloads_liv`
 --
 ALTER TABLE `editora`
   ADD PRIMARY KEY (`id_editora`);
+
+--
+-- Índices de tabela `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_iduser` (`id_usuario`),
+  ADD KEY `fk_idlivo` (`id_livro`);
 
 --
 -- Índices de tabela `usuario`
@@ -261,19 +326,25 @@ ALTER TABLE `cadastro_adm`
 -- AUTO_INCREMENT de tabela `cadastro_liv`
 --
 ALTER TABLE `cadastro_liv`
-  MODIFY `id_liv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_liv` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_categoria` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `classificacao`
 --
 ALTER TABLE `classificacao`
   MODIFY `id_classificacao` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `comentario`
+--
+ALTER TABLE `comentario`
+  MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `downloads_liv`
@@ -285,13 +356,19 @@ ALTER TABLE `downloads_liv`
 -- AUTO_INCREMENT de tabela `editora`
 --
 ALTER TABLE `editora`
-  MODIFY `id_editora` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_editora` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `favoritos`
+--
+ALTER TABLE `favoritos`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para tabelas despejadas
@@ -313,11 +390,25 @@ ALTER TABLE `cadastro_liv`
   ADD CONSTRAINT `fk_livros_editora` FOREIGN KEY (`id_editora`) REFERENCES `editora` (`id_editora`);
 
 --
+-- Restrições para tabelas `comentario`
+--
+ALTER TABLE `comentario`
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`),
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`id_liv`) REFERENCES `cadastro_liv` (`id_liv`);
+
+--
 -- Restrições para tabelas `downloads_liv`
 --
 ALTER TABLE `downloads_liv`
   ADD CONSTRAINT `fk_idliv` FOREIGN KEY (`id_livro`) REFERENCES `cadastro_liv` (`id_liv`),
   ADD CONSTRAINT `fk_userid` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`);
+
+--
+-- Restrições para tabelas `favoritos`
+--
+ALTER TABLE `favoritos`
+  ADD CONSTRAINT `fk_idlivo` FOREIGN KEY (`id_livro`) REFERENCES `cadastro_liv` (`id_liv`),
+  ADD CONSTRAINT `fk_iduser` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
