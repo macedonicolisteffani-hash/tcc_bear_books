@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+
 include "../../ARQUIVOS/conexao.php";
 
 if (!isset($_SESSION['id_user'])) {
@@ -9,7 +13,6 @@ if (!isset($_SESSION['id_user'])) {
 
 $id_user = (int) $_SESSION['id_user'];
 
-/* Dados do usuário */
 $sql = "SELECT * FROM usuario WHERE id_user=$id_user";
 $result = $conn->query($sql);
 
@@ -20,11 +23,9 @@ if (!$result || $result->num_rows === 0) {
 
 $usuario = $result->fetch_assoc();
 
-/* Primeiro nome */
 $partes_nome = explode(" ", trim($usuario['nome_user']));
 $primeiro_nome = $partes_nome[0];
 
-/* Favoritos */
 $sql_favoritos = "SELECT cadastro_liv.*
 FROM favoritos
 INNER JOIN cadastro_liv
@@ -40,11 +41,39 @@ if ($result_favoritos) {
     $total_favoritos = $result_favoritos->num_rows;
 }
 
-/* Foto */
+$sql_progresso = "SELECT
+progresso_leitura.pagina_atual,
+cadastro_liv.id_liv,
+cadastro_liv.titulo,
+cadastro_liv.autor
+FROM progresso_leitura
+INNER JOIN cadastro_liv
+ON progresso_leitura.id_liv = cadastro_liv.id_liv
+WHERE progresso_leitura.id_user = $id_user
+ORDER BY progresso_leitura.data_atualizacao DESC
+LIMIT 1";
+
+$result_progresso = $conn->query($sql_progresso);
+
+$continue_lendo = null;
+
+if ($result_progresso && $result_progresso->num_rows > 0) {
+    $continue_lendo = $result_progresso->fetch_assoc();
+}
+
 $foto_usuario = "";
 
 if (!empty($usuario['foto_user'])) {
-    $foto_usuario = "../../ARQUIVOS/fotos_usuario/" . $usuario['foto_user'];
+    $arquivo_foto =
+        __DIR__ .
+        "/../../ARQUIVOS/fotos_usuario/" .
+        $usuario['foto_user'];
+
+    if (file_exists($arquivo_foto)) {
+        $foto_usuario =
+            "../../ARQUIVOS/fotos_usuario/" .
+            $usuario['foto_user'];
+    }
 }
 ?>
 
@@ -53,40 +82,29 @@ if (!empty($usuario['foto_user'])) {
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Meu Perfil</title>
 
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body class="perfil-page">
 
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
 
         <div class="container">
 
             <a class="navbar-brand" href="../index.php">
-
                 <img src="../../ARQUIVOS/img/logo.png" alt="Bear Books">
-
             </a>
 
             <div class="ms-auto">
 
                 <a href="../index.php" class="nav-link d-inline">
-
                     Início
-
                 </a>
 
             </div>
@@ -99,7 +117,6 @@ if (!empty($usuario['foto_user'])) {
 
         <div class="container">
 
-            <!-- Cabeçalho do perfil -->
             <section class="perfil-cabecalho">
 
                 <div class="perfil-foto">
@@ -123,8 +140,7 @@ if (!empty($usuario['foto_user'])) {
                     </p>
 
                     <h1>
-                        Olá,
-                        <?php echo htmlspecialchars($primeiro_nome); ?>!
+                        Olá, <?php echo htmlspecialchars($primeiro_nome); ?>!
                     </h1>
 
                     <p>
@@ -135,16 +151,12 @@ if (!empty($usuario['foto_user'])) {
 
             </section>
 
-            <!-- Ações -->
             <section class="perfil-acoes">
 
-                <!-- Favoritos -->
                 <a href="#meus-favoritos" class="perfil-acao">
 
                     <div class="perfil-acao-icone">
-
                         <i class="bi bi-heart"></i>
-
                     </div>
 
                     <div>
@@ -152,8 +164,7 @@ if (!empty($usuario['foto_user'])) {
                         <h3>Favoritos</h3>
 
                         <p>
-                            <?php echo $total_favoritos; ?>
-                            livro(s) salvo(s)
+                            <?php echo $total_favoritos; ?> livro(s) salvo(s)
                         </p>
 
                     </div>
@@ -162,36 +173,56 @@ if (!empty($usuario['foto_user'])) {
 
                 </a>
 
-                <!-- Continue lendo -->
-                <div class="perfil-acao perfil-acao-desativada">
+                <?php if ($continue_lendo) { ?>
 
-                    <div class="perfil-acao-icone">
+                    <a href="../lerLivro.php?id=<?php echo $continue_lendo['id_liv']; ?>"
+                        class="perfil-acao">
 
-                        <i class="bi bi-book"></i>
+                        <div class="perfil-acao-icone">
+                            <i class="bi bi-book"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Continue lendo</h3>
+
+                            <p>
+                                <?php echo htmlspecialchars($continue_lendo['titulo']); ?>
+                                - Página <?php echo $continue_lendo['pagina_atual']; ?>
+                            </p>
+
+                        </div>
+
+                        <i class="bi bi-chevron-right perfil-seta"></i>
+
+                    </a>
+
+                <?php } else { ?>
+
+                    <div class="perfil-acao perfil-acao-desativada">
+
+                        <div class="perfil-acao-icone">
+                            <i class="bi bi-book"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>Continue lendo</h3>
+
+                            <p>
+                                Você ainda não iniciou nenhuma leitura
+                            </p>
+
+                        </div>
 
                     </div>
 
-                    <div>
+                <?php } ?>
 
-                        <h3>Continue lendo</h3>
-
-                        <p>
-                            Veja onde você parou
-                        </p>
-
-                        <span>Em breve</span>
-
-                    </div>
-
-                </div>
-
-                <!-- Downloads -->
                 <div class="perfil-acao perfil-acao-desativada">
 
                     <div class="perfil-acao-icone">
-
                         <i class="bi bi-download"></i>
-
                     </div>
 
                     <div>
@@ -210,7 +241,6 @@ if (!empty($usuario['foto_user'])) {
 
             </section>
 
-            <!-- Dados pessoais -->
             <section class="perfil-painel">
 
                 <div class="perfil-painel-titulo">
@@ -219,7 +249,9 @@ if (!empty($usuario['foto_user'])) {
 
                         <p>CONTA</p>
 
-                        <h2>Informações pessoais</h2>
+                        <h2>
+                            Informações pessoais
+                        </h2>
 
                     </div>
 
@@ -297,7 +329,6 @@ if (!empty($usuario['foto_user'])) {
 
             </section>
 
-            <!-- Favoritos -->
             <section class="perfil-favoritos" id="meus-favoritos">
 
                 <div class="perfil-secao-titulo">
@@ -306,13 +337,17 @@ if (!empty($usuario['foto_user'])) {
 
                         <p>MINHA BIBLIOTECA</p>
 
-                        <h2>Livros favoritos</h2>
+                        <h2>
+                            Livros favoritos
+                        </h2>
 
                     </div>
 
                     <a href="../catalogo.php">
+
                         Explorar catálogo
                         <i class="bi bi-arrow-right"></i>
+
                     </a>
 
                 </div>
@@ -325,22 +360,25 @@ if (!empty($usuario['foto_user'])) {
                     <div class="row g-4">
 
                         <?php
-                        while (
-                            $livro =
-                            $result_favoritos->fetch_assoc()
-                        ) {
+                        while ($livro = $result_favoritos->fetch_assoc()) {
 
-                            $capa =
-                                "../../ARQUIVOS/img/livroicon.png";
+                            $capa = "../../ARQUIVOS/img/livroicon.png";
 
                             if (!empty($livro['foto_capa'])) {
 
-                                $capa =
-                                    "../../ARQUIVOS/capas/" .
+                                $arquivo_capa =
+                                    __DIR__ .
+                                    "/../../ARQUIVOS/capas/" .
                                     $livro['foto_capa'];
 
+                                if (file_exists($arquivo_capa)) {
+
+                                    $capa =
+                                        "../../ARQUIVOS/capas/" .
+                                        $livro['foto_capa'];
+                                }
                             }
-                            ?>
+                        ?>
 
                             <div class="col-lg-3 col-md-4 col-sm-6">
 
@@ -382,11 +420,12 @@ if (!empty($usuario['foto_user'])) {
 
                         <i class="bi bi-heart"></i>
 
-                        <h3>Nenhum favorito ainda</h3>
+                        <h3>
+                            Nenhum favorito ainda
+                        </h3>
 
                         <p>
-                            Os livros que você favoritar
-                            aparecerão aqui.
+                            Os livros que você favoritar aparecerão aqui.
                         </p>
 
                         <a href="../catalogo.php">
@@ -402,14 +441,13 @@ if (!empty($usuario['foto_user'])) {
         </div>
 
     </main>
-    <!-- Footer -->
+
     <footer class="footer-principal">
 
         <div class="container">
 
             <div class="row g-4">
 
-                <!-- Bear Books -->
                 <div class="col-lg-4 col-md-6">
 
                     <div class="footer-marca">
@@ -426,7 +464,6 @@ if (!empty($usuario['foto_user'])) {
 
                 </div>
 
-                <!-- Navegação -->
                 <div class="col-lg-2 col-md-6">
 
                     <div class="footer-links">
@@ -449,7 +486,6 @@ if (!empty($usuario['foto_user'])) {
 
                 </div>
 
-                <!-- Contato -->
                 <div class="col-lg-3 col-md-6">
 
                     <div class="footer-contato">
@@ -457,32 +493,37 @@ if (!empty($usuario['foto_user'])) {
                         <h5>Contato</h5>
 
                         <p>
+
                             <i class="bi bi-envelope"></i>
                             contato@bearbooks.com
+
                         </p>
 
                         <p>
+
                             <i class="bi bi-book"></i>
                             Biblioteca digital
+
                         </p>
 
                     </div>
 
                 </div>
 
-                <!-- Fale conosco -->
                 <div class="col-lg-3 col-md-6">
 
                     <div class="footer-fale">
 
-                        <h5>Precisa de ajuda?</h5>
+                        <h5>
+                            Precisa de ajuda?
+                        </h5>
 
                         <p>
                             Tem alguma dúvida ou sugestão?
                             Entre em contato com nossa equipe.
                         </p>
 
-                        <a href="faleconosco.php" class="btn-footer-contato">
+                        <a href="../faleconosco.php" class="btn-footer-contato">
 
                             <i class="bi bi-chat-heart"></i>
                             Fale Conosco
@@ -512,6 +553,14 @@ if (!empty($usuario['foto_user'])) {
         </div>
 
     </footer>
+
+    <script>
+        window.addEventListener("pageshow", function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 
 </body>
 

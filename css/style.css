@@ -1325,7 +1325,7 @@ body {
     height: 35px;
     border: none;
     border-radius: 50%;
-    background-color: rgba(255,255,255,0.92);
+    background-color: rgba(255, 255, 255, 0.92);
     color: #1F3A56;
     font-size: 18px;
     display: flex;
@@ -1408,7 +1408,7 @@ body {
 .carrossel-literario .carousel {
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 5px 16px rgba(31,58,86,0.15);
+    box-shadow: 0 5px 16px rgba(31, 58, 86, 0.15);
 }
 
 .carrossel-literario .carousel-item img {
@@ -1547,13 +1547,13 @@ body {
     border-radius: 10px;
     background-color: white;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(31,58,86,0.08);
+    box-shadow: 0 3px 10px rgba(31, 58, 86, 0.08);
     transition: 0.3s;
 }
 
 .card-catalogo:hover {
     transform: translateY(-4px);
-    box-shadow: 0 7px 18px rgba(31,58,86,0.15);
+    box-shadow: 0 7px 18px rgba(31, 58, 86, 0.15);
 }
 
 .catalogo-capa {
@@ -1830,7 +1830,7 @@ body {
     padding: 30px;
 }
 
-.detalhes-descricao > span {
+.detalhes-descricao>span {
     color: #C6A25A;
     font-size: 11px;
     font-weight: bold;
@@ -1935,7 +1935,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255,255,255,0.06);
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
 .hero-icone i {
@@ -1989,7 +1989,7 @@ body {
     border: 1px solid #E5E0D5;
     border-radius: 18px;
     background-color: white;
-    box-shadow: 0 4px 15px rgba(31,58,86,0.08);
+    box-shadow: 0 4px 15px rgba(31, 58, 86, 0.08);
 }
 
 .card-destaque .card-body {
@@ -2114,7 +2114,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(255,255,255,0.08);
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 .banner-livro i {
@@ -2131,13 +2131,13 @@ body {
     border: 1px solid #E5E0D5;
     border-radius: 18px;
     background-color: white;
-    box-shadow: 0 4px 15px rgba(31,58,86,0.08);
+    box-shadow: 0 4px 15px rgba(31, 58, 86, 0.08);
     transition: 0.3s;
 }
 
 .card-sobre:hover {
     transform: translateY(-3px);
-    box-shadow: 0 7px 20px rgba(31,58,86,0.13);
+    box-shadow: 0 7px 20px rgba(31, 58, 86, 0.13);
 }
 
 .card-sobre .card-body {
@@ -2226,7 +2226,7 @@ body {
     text-align: center;
 }
 
-.frase > i {
+.frase>i {
     color: #C6A25A;
     font-size: 38px;
 }
@@ -2350,7 +2350,7 @@ body {
     background-color: white;
     border: 2px solid #C6A25A;
     border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .formulario-contato h1 {
@@ -2387,7 +2387,7 @@ body {
 
 .formulario-contato .form-control:focus {
     border-color: #C6A25A;
-    box-shadow: 0 0 0 3px rgba(198,162,90,0.15);
+    box-shadow: 0 0 0 3px rgba(198, 162, 90, 0.15);
 }
 
 .btn-enviar {
@@ -2405,7 +2405,7 @@ body {
     background-color: #C6A25A;
     color: #1F3A56;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Card Fale Conosco */
@@ -2417,7 +2417,7 @@ body {
     border: 2px solid #C6A25A;
     border-radius: 18px;
     color: white;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .icone-contato {
@@ -2440,7 +2440,7 @@ body {
     font-weight: bold;
 }
 
-.fundofale > p {
+.fundofale>p {
     color: white;
     font-size: 17px;
     line-height: 1.7;
@@ -2456,10 +2456,10 @@ body {
     padding-top: 20px;
     background: none;
     border-radius: 0;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.fundofale .informacao > i {
+.fundofale .informacao>i {
     color: #C6A25A;
     font-size: 25px;
 }
@@ -2474,6 +2474,10 @@ body {
     margin-top: 3px;
     color: white;
     font-size: 14px;
+}
+
+#mensagem {
+    resize: none;
 }
 
 
@@ -2577,7 +2581,7 @@ body {
 
 .footer-linha {
     margin: 35px 0 18px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .footer-final {
@@ -2659,7 +2663,7 @@ body {
     margin-bottom: 22px;
 }
 
-.comentarios-cabecalho > div > span {
+.comentarios-cabecalho>div>span {
     color: #C6A25A;
     font-size: 11px;
     font-weight: bold;
@@ -2672,7 +2676,7 @@ body {
     font-size: 25px;
 }
 
-.comentarios-cabecalho > p {
+.comentarios-cabecalho>p {
     margin: 0;
     color: #777;
     font-size: 13px;
@@ -2969,6 +2973,144 @@ body {
 
     .modal-comentario .modal-footer {
         padding: 15px 20px 20px;
+    }
+
+}
+
+
+/* Página de leitura */
+
+.pagina-leitura {
+    background-color: #EAE8E2;
+}
+
+
+/* Barra do livro */
+
+.leitura-barra {
+    background-color: white;
+    border-bottom: 1px solid #DDD8CC;
+}
+
+.leitura-barra-conteudo {
+    display: flex;
+    align-items: center;
+    padding: 15px 35px;
+}
+
+.leitura-voltar {
+    margin-right: 30px;
+    color: #1F3A56;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.leitura-voltar:hover {
+    color: #C6A25A;
+}
+
+.leitura-voltar i {
+    margin-right: 5px;
+}
+
+.leitura-livro {
+    display: flex;
+    flex-direction: column;
+}
+
+.leitura-livro strong {
+    color: #1F3A56;
+    font-size: 16px;
+}
+
+.leitura-livro span {
+    margin-top: 2px;
+    color: #777;
+    font-size: 12px;
+}
+
+
+/* Área do leitor */
+
+.area-leitura {
+    padding: 20px 25px 30px;
+}
+
+.leitor-container {
+    width: 100%;
+    height: 82vh;
+    min-height: 650px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 15px rgba(31, 58, 86, 0.12);
+    overflow: hidden;
+}
+
+#adobe-dc-view {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Tablet */
+
+@media (max-width: 768px) {
+
+    .leitura-barra-conteudo {
+        padding: 13px 20px;
+    }
+
+    .leitura-voltar {
+        margin-right: 20px;
+    }
+
+    .leitura-livro strong {
+        font-size: 14px;
+    }
+
+    .area-leitura {
+        padding: 15px;
+    }
+
+    .leitor-container {
+        height: 78vh;
+        min-height: 550px;
+    }
+
+}
+
+
+/* Celular */
+
+@media (max-width: 576px) {
+
+    .leitura-barra-conteudo {
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+
+    .leitura-voltar {
+        margin-right: 15px;
+        font-size: 13px;
+    }
+
+    .leitura-livro strong {
+        font-size: 13px;
+    }
+
+    .leitura-livro span {
+        font-size: 11px;
+    }
+
+    .area-leitura {
+        padding: 10px;
+    }
+
+    .leitor-container {
+        height: 75vh;
+        min-height: 500px;
+        border-radius: 5px;
     }
 
 }
