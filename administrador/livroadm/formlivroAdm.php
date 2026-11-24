@@ -98,8 +98,8 @@ $result_categoria = $conn->query($sql_categoria);
                                 <label for="ano" class="form-label">
                                     Ano:
                                 </label>
-                                <input type="text" class="form-control" id="ano" name="ano_livro"
-                                    placeholder="Digite aqui..." required>
+                                <input type="number" class="form-control" id="ano" name="ano_livro"
+                                placeholder="Ex: 1881" min="1000" max="2100" required>
                             </div>
 
 

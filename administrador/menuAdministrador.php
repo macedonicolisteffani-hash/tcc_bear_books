@@ -105,7 +105,7 @@
             </div>
 
             <div class="col-12 col-sm-6 col-lg-4">
-                <a href="comentario/gerenciarComentarios.php" class="text-decoration-none">
+                <a href="comentario/gerenciarComentario.php" class="text-decoration-none">
                     <div class="card text-center">
                         <div class="card-body">
                             <i class="bi bi-chat-dots-fill fs-1"></i>
@@ -117,7 +117,7 @@
             </div>
 
             <div class="col-12 col-sm-6 col-lg-4">
-                <a href="usuario/gerenciarUsuarios.php" class="text-decoration-none">
+                <a href="usuarios/gerenciarUsuarios.php" class="text-decoration-none">
                     <div class="card text-center">
                         <div class="card-body">
                             <i class="bi bi-people-fill fs-1"></i>
